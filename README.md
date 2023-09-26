@@ -32,7 +32,7 @@ Para probar la API REST seguir estos pasos:
     "isactive": "ACTIVE"
 }
 ``` 
-<strong>Nota:</strong> el servicio no permite correos repetidos, el formato de correo para ingresar un usuario debe ser aaaaaaa@dominio.cl<br>
+<strong>Nota:</strong> el servicio no permite correos repetidos, el formato de correo para ingresar un usuario debe ser aaaaaaa@dominio.cl<br><br>
 Las politicas habilitadas para crear un password valido es:
 1. Al menos un digito
 2. Al menos una mayuscula

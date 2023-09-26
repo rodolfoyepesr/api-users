@@ -2,10 +2,10 @@
 API RESTful para crear usuarios
 
 Para probar la API REST seguir estos pasos:
-1. Clonar el proyecto api-users en local
+1. Clonar el proyecto <strong>api-users</strong> en local
 2. Correr este proyecto con Spring Boot App
 3. Una vez levantado ir a Postman o cualquier herramienta para testear APIs
-4. Seleccionar el metodo POST y agregar la URL /users/add
+4. Seleccionar el metodo POST y agregar la URL <strong>/users/add</strong>
 5. ingresar el JSON request respetando el siguiente formato:
 ```json   
 {
@@ -32,7 +32,7 @@ Para probar la API REST seguir estos pasos:
     "isactive": "ACTIVE"
 }
 ``` 
-<strong>Nota:</strong> el servicio no permite correos repetidos, el formato de correo para ingresar un usuario debe ser aaaaaaa@dominio.cl
+<strong>Nota:</strong> el servicio no permite correos repetidos, el formato de correo para ingresar un usuario debe ser aaaaaaa@dominio.cl<br>
 Las politicas habilitadas para crear un password valido es:
 1. Al menos un digito
 2. Al menos una mayuscula

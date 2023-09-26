@@ -7,18 +7,20 @@ Para probar la API REST seguir estos pasos:
 3. Una vez levantado ir a Postman o cualquier herramienta para testear APIs
 4. Seleccionar el metodo POST y agregar la URL /users/add
 5. ingresar el JSON request respetando el siguiente formato:
+```json   
 {
-"name": "Juan Rodriguez",
-"email": "juan@rodriguez.org",
-"password": "Hunter2@",
-"phones": [
-{
-"number": "1234567",
-"citycode": "1",
-"contrycode": "57"
+   "name": "Juan Rodriguez",
+   "email": "juan@rodriguez.org",
+   "password": "Hunter2@",
+   "phones": [
+      {
+         "number": "1234567",
+         "citycode": "1",
+         "contrycode": "57"
+      }
+   ]
 }
-]
-}   
+```  
 8. Se creara un registro en la base de datos en memoria H2 con la informacion enviada y retornara un status 201 y el JSON de respuestas como el siguiente:
    {
     "id": "c2f26bd9-d516-41d3-9b54-d0c27f519d35",

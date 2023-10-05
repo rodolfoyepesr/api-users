@@ -15,8 +15,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "usuarios")
+@Data
 public class Usuario {
 
 	@Id
@@ -36,7 +39,7 @@ public class Usuario {
 	private List<Telefono> phones;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date create;
+	private Date created;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
@@ -47,95 +50,8 @@ public class Usuario {
 	
 	@PrePersist
 	public void prePersist() {
-		this.create = new Date();
+		this.created = new Date();
 		this.lastLogin = new Date();
 	}
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public List<Telefono> getPhones() {
-		return phones;
-	}
-
-	public void setPhones(List<Telefono> phones) {
-		this.phones = phones;
-	}
-
-	public Date getCreate() {
-		return create;
-	}
-
-	public void setCreate(Date create) {
-		this.create = create;
-	}
-
-	public Date getModified() {
-		return modified;
-	}
-
-	public void setModified(Date modified) {
-		this.modified = modified;
-	}
-
-	public Date getLastLogin() {
-		return lastLogin;
-	}
-
-	public void setLastLogin(Date lastLogin) {
-		this.lastLogin = lastLogin;
-	}
 }

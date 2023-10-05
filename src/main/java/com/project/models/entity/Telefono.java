@@ -9,8 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "telefonos")
+@Data
 public class Telefono {
 
 	@Id
@@ -28,44 +31,4 @@ public class Telefono {
 	@ManyToOne
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getNumber() {
-		return number;
-	}
-
-	public void setNumber(Long number) {
-		this.number = number;
-	}
-
-	public Long getCitycode() {
-		return citycode;
-	}
-
-	public void setCitycode(Long citycode) {
-		this.citycode = citycode;
-	}
-
-	public Long getCountrycode() {
-		return countrycode;
-	}
-
-	public void setCountrycode(Long countrycode) {
-		this.countrycode = countrycode;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 }

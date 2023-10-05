@@ -3,7 +3,6 @@ package com.project.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ public class UsuarioControllers {
 	@PostMapping("/add")
 	public ResponseEntity<?> crearUsuario(@RequestBody UsuarioRequestVO request){
 		ErrorResponseVO error = new ErrorResponseVO();
-		
+			
 		if (service.emailIsPresent(request.getEmail())) {
 			error.setMensaje("El correo ya registrado");
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
@@ -42,10 +41,5 @@ public class UsuarioControllers {
 		
 		UsuarioResponseVO response = service.save(request);
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
-	}
-	
-	@GetMapping("/list")
-	public ResponseEntity<?> listar() {
-		return ResponseEntity.ok().body(service.findAll());
 	}
 }

@@ -1,15 +1,9 @@
 package com.project.vo;
 
+import lombok.Data;
+
+@Data
 public class ErrorResponseVO {
 	
-	String mensaje;
-
-	public String getMensaje() {
-		return mensaje;
-	}
-
-	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
-	}
-	
+	String mensaje;	
 }

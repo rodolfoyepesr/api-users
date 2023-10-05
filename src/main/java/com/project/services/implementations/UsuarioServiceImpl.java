@@ -1,6 +1,5 @@
 package com.project.services.implementations;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -8,13 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.models.entity.Telefono;
 import com.project.models.entity.Usuario;
 import com.project.models.repository.UsuarioRepository;
 import com.project.services.interfaces.UsuarioService;
@@ -29,6 +28,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
+	private final ModelMapper mapper = new ModelMapper();
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -37,34 +37,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Transactional
 	public UsuarioResponseVO save(UsuarioRequestVO usuarioVO) {
 		Usuario usuario = new Usuario();
-		List<Telefono> phones = new ArrayList<>();
 		UsuarioResponseVO response = new UsuarioResponseVO();
 		
 		if (!usuarioVO.getPhones().isEmpty()) {
 			usuarioVO.getPhones().forEach(phone -> {
-				Telefono telefono = new Telefono();
-				telefono.setNumber(phone.getNumber());
-				telefono.setCitycode(phone.getCitycode());
-				telefono.setCountrycode(phone.getCountrycode());	
-				telefono.setUsuario(usuario);
-				phones.add(telefono);
+				phone.setUsuario(usuario);
 			});
 		}
 		
+		mapper.map(usuarioVO, usuario);	
 		usuario.setUuid(java.util.UUID.randomUUID().toString());
-		usuario.setName(usuarioVO.getName());
-		usuario.setEmail(usuarioVO.getEmail());
-		usuario.setPassword(usuarioVO.getPassword());
 		usuario.setActive(Boolean.TRUE);
 		usuario.setToken(getJWTToken(usuarioVO.getEmail()));
-		usuario.setPhones(phones);
 		Usuario persist = usuarioRepository.save(usuario);
 		
-		response.setId(persist.getUuid());
-		response.setCreated(persist.getCreate());
-		response.setModified(persist.getModified());
-		response.setLastLogin(persist.getLastLogin());
-		response.setToken(persist.getToken());
+		mapper.map(persist, response);
 		response.setIsactive(persist.isActive() == Boolean.TRUE ? "ACTIVE" : "INACTIVE");
 		
 		return response;
@@ -94,11 +81,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return false;
 	}
 	
-	@Override
-	public Iterable<Usuario> findAll() {
-		return usuarioRepository.findAll();
-	}
-
 	@Override
 	public boolean validatePwd(String password) {	
 		Pattern pattern = Pattern
